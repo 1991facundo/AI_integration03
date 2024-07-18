@@ -42,7 +42,7 @@ export const DataEntryForm: React.FC = () => {
   };
 
   const calculateClass = () => {
-    if (ticketClass === 'stowaway') return 3;
+    if (ticketClass === 'stowaway') return 3; 
     switch (ticketClass) {
       case 'firstClass':
         return 1;
@@ -78,6 +78,7 @@ export const DataEntryForm: React.FC = () => {
           type="number"
           value={age || ''}
           onChange={(e) => setAge(Number(e.target.value))}
+          max={99}  
           className="mt-1 block w-full p-2 border rounded"
         />
       </div>

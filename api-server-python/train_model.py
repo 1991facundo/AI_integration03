@@ -1,8 +1,7 @@
 
 import pandas as pd
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
 import joblib
 
 
@@ -23,13 +22,8 @@ y = data['Survived']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 
-param_grid = {
-    'n_estimators': [50, 100, 200],
-    'max_depth': [None, 10, 20, 30]
-}
-
-model = GridSearchCV(RandomForestClassifier(), param_grid, cv=5)
+model = LogisticRegression(max_iter=1000)
 model.fit(X_train, y_train)
 
 
-joblib.dump(model.best_estimator_, 'model.joblib')
+joblib.dump(model, 'model.joblib')
