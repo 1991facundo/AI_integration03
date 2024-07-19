@@ -3,8 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pandas as pd
 import joblib
-import gdown
-import os
+
 
 app = FastAPI()
 
@@ -17,14 +16,7 @@ app.add_middleware(
 )
 
 
-url = 'https://drive.google.com/uc?id=1cpeDIT5m0PKEjSRMaprGYWoKCyaadbSK'
-output = 'model.joblib'
-
-# Descargar archivo si no existe
-if not os.path.exists(output):
-    gdown.download(url, output, quiet=False)
-
-model = joblib.load(output)
+model = joblib.load('model.joblib')
 
 class PredictionRequest(BaseModel):
     Pclass: int

@@ -33,7 +33,7 @@ export const DataEntryForm: React.FC = () => {
         }),
       });
       const data = await response.json();
-      setResult(`Your survival chance is ${data.survival_chance} and you are in ${ticketClass === 'stowaway' ? 'No Ticket - Stowaway' : ticketClass}`);
+      setResult(`Your survival chance is ${data.survival_chance}`);
     } catch (error) {
       setError('Failed to fetch prediction. Please try again.');
     } finally {
