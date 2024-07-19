@@ -6,13 +6,15 @@ import joblib
 
 app = FastAPI()
 
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 model = joblib.load('model.joblib')
 
@@ -29,10 +31,11 @@ class PredictionRequest(BaseModel):
 def predict_survival(data: PredictionRequest):
     df = pd.DataFrame([data.dict()])
     probability = model.predict_proba(df)[0][1]  
+    
     if data.Sex == 1 and data.Age <= 18 and data.Pclass == 1:
         probability += 0.1  
     elif data.Sex == 0 and data.Pclass == 3:
-        probability -= 0.1 
+        probability -= 0.1  
     probability = min(max(probability, 0), 1)  
     return {"survival_chance": f"{probability * 100:.2f}%"}
 
