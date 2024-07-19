@@ -1,5 +1,5 @@
-# Ignorar archivos y directorios innecesarios
 venv/
 *.pyc
 __pycache__/
 data/
+model.joblib
